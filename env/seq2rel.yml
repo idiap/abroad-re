@@ -1,0 +1,14 @@
+name: seq2rel
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+    - pandas
+    - nltk
+    - tqdm
+    - allennlp
+    - git+https://github.com/JohnGiorgi/seq2rel.git
+    - git+https://github.com/JohnGiorgi/seq2rel-ds.git
+    - tqdm

@@ -1,0 +1,19 @@
+name: llm
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.10
+  - pytorch::pytorch=1.13
+  - pytorch::pytorch-cuda=11.6
+  - nvidia::cuda=11.6
+  - pip
+  - pip:
+    - numpy
+    - sentencepiece
+    - pandas
+    - tqdm
+    - num2words
+    - sentence_transformers
+    - keybert
+    - more-itertools

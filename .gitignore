@@ -1,0 +1,15 @@
+**/__pycache__/
+**/.ipynb_checkpoints
+**.csv
+**.tsv
+.vscode
+**.Rhistory
+# job files
+**.e*
+**.o*
+**.txt
+**.gz
+**.log
+**.json
+**.Rmd
+**.html

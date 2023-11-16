@@ -1,0 +1,24 @@
+name: qlora
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.10
+  - pytorch::pytorch=1.13
+  - pytorch::torchvision
+  - pytorch::torchaudio
+  - pytorch::pytorch-cuda=11.6
+  - nvidia::cuda=11.6
+  - pip:
+    - numpy
+    - pandas
+    - sentencepiece
+    - scipy
+    - datasets
+    - sacremoses
+    - git+https://github.com/huggingface/peft.git
+    - git+https://github.com/huggingface/transformers.git
+    - git+https://github.com/huggingface/accelerate.git
+    - tqdm
+    - optuna
+    - bitsandbytes

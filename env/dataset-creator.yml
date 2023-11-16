@@ -1,0 +1,10 @@
+name: dataset-creator
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+    - eutils
+    - tqdm
+    - git+https://gitlab.idiap.ch/abroad/gme-sampler.git

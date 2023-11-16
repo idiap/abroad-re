@@ -1,0 +1,883 @@
+{
+    "18167044": {
+        "PMID": "18167044",
+        "ArticleTitle": "Estradiol-antagonistic activity of phenolic compounds from leguminous plants.",
+        "AbstractText": "Natural flavonoids are currently receiving much attention because of their estrogenic and antiestrogenic properties. Six isoflavones (isoprunetin, isoprunetin 7-O-beta-D-glucopyranoside, isoprunetin 4',7-di-O-beta-D-glucopyranoside, genistein, genistein 7-O-beta-D-glucopyranoside, daidzein), four flavones (luteolin, luteolin 7-O-beta-D-glucopyranoside, luteolin 4'-O-beta-D-glucopyranoside, licoflavone C), isolated from Genista morisii and G. ephedroides (two Leguminosae plants of the Mediterranean area) together with two structurally related pterocarpans, bitucarpin A and erybraedyn C, isolated from Bituminaria bituminosa (Leguminosae), were tested for the antagonist activity by a yeast based estrogen receptor assay (Saccharomyces cerevisiae RMY326 ER-ERE). Most compounds inhibited the estradiol-induced transcriptional activity in a concentration dependent manner. In particular, for the flavone luteolin 77% inhibition of the induced beta-galactosidase activity was observed. Interestingly, licoflavone C exhibited a dose-dependent antagonistic activity at concentrations up to 10(-4) M, but stimulated beta-galactosidase expression at higher concentrations resulting in a U-shaped-like dose-response curve.",
+        "id": "Q46827040",
+        "doi": "10.1002/PTR.2327",
+        "chemicals": [
+            {
+                "id": "Q76280934",
+                "pubchem_id": "5280601",
+                "label": "Luteolin 7-glucuronide"
+            },
+            {
+                "id": "Q415957",
+                "pubchem_id": "5280961",
+                "label": "Genistein"
+            },
+            {
+                "id": "Q104400239",
+                "pubchem_id": "11581938",
+                "label": "(6aR,11aR)-3,9-Dihydroxy-4,8-diprenylpterocarpan"
+            },
+            {
+                "id": "Q408732",
+                "pubchem_id": "5281708",
+                "label": "Daidzein"
+            },
+            {
+                "id": "Q415011",
+                "pubchem_id": "5280445",
+                "label": "Luteolin"
+            },
+            {
+                "id": "Q27236649",
+                "pubchem_id": "10246505",
+                "label": "Licoflavone C"
+            },
+            {
+                "id": "Q4639636",
+                "pubchem_id": "5748551",
+                "label": "5-O-Methylgenistein"
+            },
+            {
+                "id": "Q5533221",
+                "pubchem_id": "5281377",
+                "label": "Genistin"
+            },
+            {
+                "id": "Q104400238",
+                "pubchem_id": "21576494",
+                "label": "Bitucarpin A"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q15479982",
+                "label": "Genista morisii"
+            },
+            {
+                "id": "Q1251922",
+                "label": "Bituminaria bituminosa"
+            },
+            {
+                "id": "Q15057312",
+                "label": "Genista ephedroides"
+            }
+        ],
+        "relations": [
+            [
+                "Q15479982",
+                "Q76280934"
+            ],
+            [
+                "Q15479982",
+                "Q415957"
+            ],
+            [
+                "Q1251922",
+                "Q104400239"
+            ],
+            [
+                "Q15479982",
+                "Q408732"
+            ],
+            [
+                "Q15479982",
+                "Q415011"
+            ],
+            [
+                "Q15057312",
+                "Q27236649"
+            ],
+            [
+                "Q15479982",
+                "Q4639636"
+            ],
+            [
+                "Q15479982",
+                "Q5533221"
+            ],
+            [
+                "Q1251922",
+                "Q104400238"
+            ]
+        ]
+    },
+    "15605380": {
+        "PMID": "15605380",
+        "ArticleTitle": "Dual effect of DL-homocysteine and S-adenosylhomocysteine on brain synthesis of the glutamate receptor antagonist, kynurenic acid.",
+        "AbstractText": "Increased serum level of homocysteine, a sulfur-containing amino acid, is considered a risk factor in vascular disorders and in dementias. The effect of homocysteine and metabolically related compounds on brain production of kynurenic acid (KYNA), an endogenous antagonist of glutamate ionotropic receptors, was studied. In rat cortical slices, DL-homocysteine enhanced (0.1-0.5 mM) or inhibited (concentration inducing 50% inhibition [IC50]=6.4 [5.5-7.5] mM) KYNA production. In vivo peripheral application of DL-homocysteine (1.3 mmol/kg intraperitoneally) increased KYNA content (pmol/g tissue) from 8.47 +/- 1.57 to 13.04 +/- 2.86 (P <0.01; 15 min) and 11.4 +/- 1.72 (P <0.01; 60 min) in cortex, and from 4.11 +/- 1.54 to 10.02 +/- 3.08 (P <0.01; 15 min) in rat hippocampus. High concentrations of DL-homocysteine (20 mM) applied via microdialysis probe decreased KYNA levels in rabbit hippocampus; this effect was antagonized partially by an antagonist of group I metabotropic glutamate receptors, LY367385. In vitro, S-adenosylhomocysteine acted similar to but more potently than DL-homocysteine, augmenting KYNA production at 0.03-0.08 mM and reducing it at > or =0.5 mM. The stimulatory effect of S-adenosylhomocysteine was abolished in the presence of the L-kynurenine uptake inhibitors L-leucine and L-phenyloalanine. Neither the N-methyl-D-aspartate (NMDA) antagonist CGS 19755 nor L-glycine influenced DL-homocysteine- and S-adenosylhomocysteine-induced changes of KYNA synthesis in vitro. DL-Homocysteine inhibited the activity of both KYNA biosynthetic enzymes, kynurenine aminotransferases (KATs) I and II, whereas S-adenosylhomocysteine reduced only the activity of KAT II. L-Methionine and L-cysteine, thiol-containing compounds metabolically related to homocysteine, acted only as weak inhibitors, reducing KYNA production in vitro and inhibiting the activity of KAT II (L-cysteine) or KAT I (L-methionine). The present data suggest that DL-homocysteine biphasically modulates KYNA synthesis. This seems to result from conversion of compound to S-adenosylhomocysteine, also acting dually on KYNA formation, and in part from the direct interaction of homocysteine with metabotropic glutamate receptors and KYNA biosynthetic enzymes. It seems probable that hyperhomocystemia-associated brain dysfunction is mediated partially by changes in brain KYNA level.",
+        "id": "Q45191286",
+        "doi": "10.1002/JNR.20359",
+        "chemicals": [
+            {
+                "id": "Q642217",
+                "pubchem_id": "3845",
+                "label": "Kynurenic acid"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q15978631",
+                "label": "Homo sapiens"
+            }
+        ],
+        "relations": [
+            [
+                "Q15978631",
+                "Q642217"
+            ]
+        ]
+    },
+    "18273876": {
+        "PMID": "18273876",
+        "ArticleTitle": "Three new phenolic glycosides from the caulis of Millettia speciosa.",
+        "AbstractText": "Three new phenolic glycosides, millettiaspecosides A--C (1-3), were isolated from the caulis of Millettia speciosa along with three known phenolic glycosides, khaephuoside B (4), seguinoside K (5), albibrissinoside B (6). Their structures were established by spectroscopic methods. The spectral analysis permitted correct assignments for (1)H and (13)C NMR data of compounds 4 and 5.",
+        "id": "Q80698047",
+        "doi": "10.1002/MRC.2189",
+        "chemicals": [
+            {
+                "id": "Q105213896",
+                "pubchem_id": "11399341",
+                "label": "Albibrissinoside B"
+            },
+            {
+                "id": "Q105203696",
+                "pubchem_id": "100998011",
+                "label": "Seguinoside K"
+            },
+            {
+                "id": "Q104998397",
+                "pubchem_id": "102523237",
+                "label": "Kaephuoside B"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q15471182",
+                "label": "Lonchocarpus sericeus"
+            },
+            {
+                "id": "Q93961895",
+                "label": "Nanhaia speciosa"
+            }
+        ],
+        "relations": [
+            [
+                "Q15471182",
+                "Q105213896"
+            ],
+            [
+                "Q93961895",
+                "Q105213896"
+            ],
+            [
+                "Q15471182",
+                "Q105203696"
+            ],
+            [
+                "Q93961895",
+                "Q105203696"
+            ],
+            [
+                "Q15471182",
+                "Q104998397"
+            ],
+            [
+                "Q93961895",
+                "Q104998397"
+            ]
+        ]
+    },
+    "889385": {
+        "PMID": "889385",
+        "ArticleTitle": "The carotenoids of Flavobacterium strain R1560.",
+        "AbstractText": "The main carotenoid of Flavobacterium strain R1560 has been identified as (3R,3'R)-zeaxanthin. Also present were small amounts of 15-cis-phytoene, phytofluene, \"zeta-carotene\" (7,8,7',8'-tetrahydro-psi, psi-carotene plus 7,8,11,12-tetrahydro-psi, psi-carotene), neurosporene, lycopene, beta-zeacarotene, gamma-carotene, beta-carotene, beta-cryptoxanthin, rubixanthin, 3-hydroxy-beta-zeacarotene and several apo-carotenals. Zeaxanthin production was inhibited by nicotine (10 mM), and lycopene and rubixanthin accumulated. The biosynthesis of zeaxanthin is discussed in terms of pathways and also of \"half-molecule\" reaction sequences. The presence of zeaxanthin may be a characteristic of a group of Flavobacterium species, and may thus be useful in the taxonomic classification of these organisms.",
+        "id": "Q67650570",
+        "doi": "10.1007/BF00428576",
+        "chemicals": [
+            {
+                "id": "Q169337",
+                "pubchem_id": "5280899",
+                "label": "Zeaxanthin"
+            },
+            {
+                "id": "Q2063702",
+                "pubchem_id": "5281252",
+                "label": "Rubixanthin"
+            },
+            {
+                "id": "Q15410298",
+                "pubchem_id": "5280790",
+                "label": "beta-Zeacarotene"
+            },
+            {
+                "id": "Q27123988",
+                "pubchem_id": "9845703",
+                "label": "beta-Citraurin"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q140572",
+                "label": "Flavobacterium"
+            }
+        ],
+        "relations": [
+            [
+                "Q140572",
+                "Q169337"
+            ],
+            [
+                "Q140572",
+                "Q2063702"
+            ],
+            [
+                "Q140572",
+                "Q15410298"
+            ],
+            [
+                "Q140572",
+                "Q27123988"
+            ]
+        ]
+    },
+    "3030275": {
+        "PMID": "3030275",
+        "ArticleTitle": "Identification of ecdysone 22-long-chain fatty acyl esters in newly laid eggs of the cattle tick Boophilus microplus.",
+        "AbstractText": "The five major apolar ecdysone esters present in newly laid eggs of the cattle tick Boophilus microplus have been purified by h.p.l.c. The quantities of the apolar esters present in the eggs were increased by administration of ecdysone to the mature females. G.c.-m.s. analysis, as their methyl esters, of the fatty acids released from the apolar ecdysone derivatives by alkali, coupled with positive-ion fast-atom-bombardment m.s. of the intact ecdysone esters, showed that the compounds consisted of a series of fatty acyl esters of ecdysone. The position of esterification of the ecdysone was established by p.m.r. spectroscopy. The combined data show that the novel apolar derivatives of ecdysone consist of the 22-palmitate, -palmitoleate, -stearate, -oleate, and -linoleate esters respectively. Confirmation was obtained by comparison with synthetic ecdysone 22-palmitate. The significance of the ecdysone fatty acyl esters as a possible source of free hormone during embryogenesis is discussed.",
+        "id": "Q41774067",
+        "doi": "10.1042/BJ2400131",
+        "chemicals": [
+            {
+                "id": "Q104375850",
+                "pubchem_id": "129776211",
+                "label": "Ecdysone-22-oleate"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q4808965",
+                "label": "Rhipicephalus microplus"
+            }
+        ],
+        "relations": [
+            [
+                "Q4808965",
+                "Q104375850"
+            ]
+        ]
+    },
+    "26630077": {
+        "PMID": "26630077",
+        "ArticleTitle": "Parallel Post-Polyketide Synthase Modification Mechanism Involved in FD-891 Biosynthesis in Streptomyces graminofaciens A-8890.",
+        "AbstractText": "To isolate a key polyketide biosynthetic intermediate for the 16-membered macrolide FD-891 (1), we inactivated two biosynthetic genes coding for post-polyketide synthase (PKS) modification enzymes: a methyltransferase (GfsG) and a cytochrome P450 (GfsF). Consequently, FD-892 (2), which lacks the epoxide moiety at C8-C9, the hydroxy group at C10, and the O-methyl group at O-25 of FD-891, was isolated from the gfsF/gfsG double-knockout mutant. In addition, 25-O-methyl-FD-892 (3) and 25-O-demethyl-FD-891 (4) were isolated from the gfsF and gfsG mutants, respectively. We also confirmed that GfsG efficiently catalyzes the methylation of 2 and 4 in vitro. Further, GfsF catalyzed the epoxidation of the double bond at C8-C9 of 2 and 3 and subsequent hydroxylation at C10, to afford 4 and 1, respectively. These results suggest that a parallel post-PKS modification mechanism is involved in FD-891 biosynthesis.",
+        "id": "Q60152012",
+        "doi": "10.1002/CBIC.201500533",
+        "chemicals": [
+            {
+                "id": "Q105352785",
+                "pubchem_id": "102107519",
+                "label": "25-O-Demethyl-FD-891"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q22665882",
+                "label": "Streptomyces halstedii"
+            },
+            {
+                "id": "Q62851397",
+                "label": "Streptomyces graminofaciens"
+            }
+        ],
+        "relations": [
+            [
+                "Q22665882",
+                "Q105352785"
+            ],
+            [
+                "Q62851397",
+                "Q105352785"
+            ]
+        ]
+    },
+    "11758920": {
+        "PMID": "11758920",
+        "ArticleTitle": "Sorbicillinol, a key intermediate of bisorbicillinoid biosynthesis in Trichoderma sp. USF-2690.",
+        "AbstractText": "In the course of our screening program for free radical scavengers from Trichoderma sp. USF-2690, we found an unidentified metabolite (1) that appeared by the method used for HPLC analysis. Metabolite 1 gradually decreased with the production of bisorbicillinoids and was easily missed during the general isolation procedure. The LC-ESI-MS (negative) analysis for 1 gave m/z 247 as the (M-1)- ion peak. The hydrolysis of synthetic 6-O-acetylsorbicillinol (+/- -2) by 0.05 M KOH and acetylation of product 1 in an aqueous solution indicated that the structure of 1 was (6S)-4-(2,4-hexadienoyl)-3,6-dihydroxy-2,6-dimethyl-2,4-cyclohexadien-1-one, designated sorbicillinol, a quinol that has been postulated to be important in bisorbicillinoid biosynthesis.",
+        "id": "Q43835150",
+        "doi": "10.1271/BBB.65.2271",
+        "chemicals": [
+            {
+                "id": "Q77513698",
+                "pubchem_id": "102249972",
+                "label": "Sorbicillinol"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q135322",
+                "label": "Trichoderma"
+            }
+        ],
+        "relations": [
+            [
+                "Q135322",
+                "Q77513698"
+            ]
+        ]
+    },
+    "21963639": {
+        "PMID": "21963639",
+        "ArticleTitle": "Spicachlorantins G-J, new lindenane sesquiterpenoid dimers from the roots of Chloranthus spicatus.",
+        "AbstractText": "Four new lindenane sesquiterpenoid dimers, spicachlorantins G-J (1-4), were isolated from the roots of Chloranthus spicatus together with seven known compounds, including chloramultilide A, shizukaol B, shizukaol D, shizukaol F, shizukaol P, chlorahololide D, and cycloshizukaol A. The planar structures of the new compounds were established by 1D-, 2D-NMR, and MS analyses. The absolute configurations of these compounds were determined by analyzing rotating Overhauser enhancement and exchange spectroscopy (ROESY) and circular dichroism (CD) spectra.",
+        "id": "Q85026516",
+        "doi": "10.1248/CPB.59.1281",
+        "chemicals": [
+            {
+                "id": "Q27138128",
+                "pubchem_id": "56681897",
+                "label": "shizukaol F"
+            },
+            {
+                "id": "Q72516802",
+                "pubchem_id": "44207635",
+                "label": "Chlorahololide D"
+            },
+            {
+                "id": "Q27138125",
+                "pubchem_id": "56661508",
+                "label": "shizukaol B"
+            },
+            {
+                "id": "Q27138127",
+                "pubchem_id": "70698151",
+                "label": "Shizukaol D"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q15382015",
+                "label": "Oryctanthus spicatus"
+            },
+            {
+                "id": "Q15230863",
+                "label": "Chloranthus spicatus"
+            }
+        ],
+        "relations": [
+            [
+                "Q15382015",
+                "Q27138128"
+            ],
+            [
+                "Q15230863",
+                "Q27138128"
+            ],
+            [
+                "Q15230863",
+                "Q72516802"
+            ],
+            [
+                "Q15382015",
+                "Q72516802"
+            ],
+            [
+                "Q15230863",
+                "Q27138125"
+            ],
+            [
+                "Q15382015",
+                "Q27138125"
+            ],
+            [
+                "Q15230863",
+                "Q27138127"
+            ],
+            [
+                "Q15382015",
+                "Q27138127"
+            ]
+        ]
+    },
+    "31151062": {
+        "PMID": "31151062",
+        "ArticleTitle": "Sesquiterpenoids and mycotoxin swainsonine from the locoweed endophytic fungus Alternaria oxytropis.",
+        "AbstractText": "Oxytropiols A-J, ten undescribed guaiane-type sesquiterpenoids, and the mycotoxin swainsonine (SW) were isolated from the locoweed endophytic fungus Alternaria oxytropis. The chemical structures of these sesquiterpenoids were elucidated on the basis of HR-ESI-MS and NMR data including 1H, 13C, HSQC, 1H-1H COSY, HMBC, and NOESY spectra, and the absolute configurations of these compounds were determined using a modified Mosher's method and X-ray diffraction spectroscopy. A possible biosynthetic pathway of these guaiane-type sesquiterpenoids is discussed, and proposed that post-modification oxidative enzymes might form these highly polyhydroxylated structures. Compound 1 displayed biological effects on the root growth of Arabidopsis thaliana, and SW displayed cytotoxicity against A549 and HeLa cancer cell lines.",
+        "id": "Q92444772",
+        "doi": "10.1016/J.PHYTOCHEM.2019.05.012",
+        "chemicals": [
+            {
+                "id": "Q105131455",
+                "pubchem_id": "146682411",
+                "label": "Oxytropiol E"
+            },
+            {
+                "id": "Q105312011",
+                "pubchem_id": "146682407",
+                "label": "Oxytropiol A"
+            },
+            {
+                "id": "Q105313076",
+                "pubchem_id": "146682408",
+                "label": "Oxytropiol B"
+            },
+            {
+                "id": "Q105384446",
+                "pubchem_id": "146682415",
+                "label": "Oxytropiol I"
+            },
+            {
+                "id": "Q104920553",
+                "pubchem_id": "146682414",
+                "label": "Oxytropiol H"
+            },
+            {
+                "id": "Q104923678",
+                "pubchem_id": "146682413",
+                "label": "Oxytropiol G"
+            },
+            {
+                "id": "Q105278045",
+                "pubchem_id": "146682409",
+                "label": "Oxytropiol C"
+            },
+            {
+                "id": "Q105036469",
+                "pubchem_id": "146682416",
+                "label": "Oxytropiol J"
+            },
+            {
+                "id": "Q105131777",
+                "pubchem_id": "146682412",
+                "label": "Oxytropiol F"
+            },
+            {
+                "id": "Q105035042",
+                "pubchem_id": "146682410",
+                "label": "Oxytropiol D"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q104920552",
+                "label": "Alternaria oxytropis"
+            }
+        ],
+        "relations": [
+            [
+                "Q104920552",
+                "Q105131455"
+            ],
+            [
+                "Q104920552",
+                "Q105312011"
+            ],
+            [
+                "Q104920552",
+                "Q105313076"
+            ],
+            [
+                "Q104920552",
+                "Q105384446"
+            ],
+            [
+                "Q104920552",
+                "Q104920553"
+            ],
+            [
+                "Q104920552",
+                "Q104923678"
+            ],
+            [
+                "Q104920552",
+                "Q105278045"
+            ],
+            [
+                "Q104920552",
+                "Q105036469"
+            ],
+            [
+                "Q104920552",
+                "Q105131777"
+            ],
+            [
+                "Q104920552",
+                "Q105035042"
+            ]
+        ]
+    },
+    "26896350": {
+        "PMID": "26896350",
+        "ArticleTitle": "Study on the Alkaloids in Tibetan Medicine Aconitum pendulum Busch by HPLC-MSn Combined with Column Chromatography.",
+        "AbstractText": "A rapid, convenient and effective identification method of alkaloids was established and an attempt on isolating and analyzing the alkaloids in Aconitum pendulum Busch was conducted successfully. In this article, four high-content components including deoxyaconitine, benzoylaconine, aconine and neoline were isolated by using column chromatography. HPLC-MS(n)was employed to deduce the regulations of fragmentation of diterpenoid alkaloids which displayed a characteristic behavior of loss of CO(28u), CH3COOH(60u), CH3OH(32u), H2O(18u) and C6H5COOH(122u). Then, according to fragmentation regulation of mass spectrometry, 42 alkaloids were found inA. pendulum Among them, 38 compounds were identified and 29 alkaloids were reported for the first time for this herb. Therefore, this means that HPLC-MS(n)combined with column chromatography could work as an effective and reliable tool for rapid identification of the chemical components of herbal medicine.",
+        "id": "Q36960512",
+        "doi": "10.1093/CHROMSCI/BMW002",
+        "chemicals": [
+            {
+                "id": "Q27279200",
+                "pubchem_id": "16401653",
+                "label": "Unii-gns9eex31X"
+            },
+            {
+                "id": "Q105340285",
+                "pubchem_id": "10003218",
+                "label": "Bullatine B"
+            },
+            {
+                "id": "Q27256545",
+                "pubchem_id": "60155417",
+                "label": "Benzaconine"
+            },
+            {
+                "id": "Q110173735",
+                "pubchem_id": "417761",
+                "label": "Aconine"
+            },
+            {
+                "id": "Q27256545",
+                "pubchem_id": "20055771",
+                "label": "Benzoylaconine"
+            },
+            {
+                "id": "Q27279200",
+                "pubchem_id": "20054813",
+                "label": "Jesaconine"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q15361906",
+                "label": "Aconitum pendulum"
+            },
+            {
+                "id": "Q2561734",
+                "label": "Aconitum carmichaelii"
+            }
+        ],
+        "relations": [
+            [
+                "Q15361906",
+                "Q27279200"
+            ],
+            [
+                "Q15361906",
+                "Q105340285"
+            ],
+            [
+                "Q15361906",
+                "Q27256545"
+            ],
+            [
+                "Q2561734",
+                "Q110173735"
+            ]
+        ]
+    },
+    "10775400": {
+        "PMID": "10775400",
+        "ArticleTitle": "New analogue of gymnodimine from a Gymnodinium species.",
+        "AbstractText": "A spiroimine, gymnodimine B (1), was isolated from cells recovered by filtration from cultures of a marine dinoflagellate, Gymnodinium sp. Its structure was identified by one- and two-dimensional NMR spectroscopy and mass spectrometry. Gymnodimine B is similar in structure to gymnodimine (2) but contains an exocyclic methylene at C-17 and an allylic hydroxyl group at C-18.",
+        "id": "Q73699254",
+        "doi": "10.1021/JF991031K",
+        "chemicals": [
+            {
+                "id": "Q27268839",
+                "pubchem_id": "11649137",
+                "label": "Gymnodimine"
+            },
+            {
+                "id": "Q105228991",
+                "pubchem_id": "21575428",
+                "label": "Gymnodimine B"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q140581",
+                "label": "Gymnodinium"
+            }
+        ],
+        "relations": [
+            [
+                "Q140581",
+                "Q27268839"
+            ],
+            [
+                "Q140581",
+                "Q105228991"
+            ]
+        ]
+    },
+    "7964792": {
+        "PMID": "7964792",
+        "ArticleTitle": "Triterpenoid saponins from the roots of Aralia spinifolia.",
+        "AbstractText": "Two new triterpenoid saponins named aralosides H[1] and J [2], along with four known triterpenoid saponins 3-6 were isolated from the roots of Aralia spinifolia. Their structures were determined as 3-O-beta-D-xylopyranosyl-(1-->2)-[beta-D-glucuronopyranosyl (1-->3)]-beta-D-glucopyranosyl-oleanolic acid [1], 3-O-alpha-L-arabinofuranosyl-(1-->4)-beta-D-glucuronopyranosyl- oleanolic acid 28-O-beta-D-galactopyranosyl ester [2], araloside A methyl ester [3], chikusetusaponin Ib [4], chikusetusaponin IV [5], and araloside A [6] on the basis of spectral and chemical data.",
+        "id": "Q72815932",
+        "doi": "10.1021/NP50109A016",
+        "chemicals": [
+            {
+                "id": "Q105306777",
+                "pubchem_id": "52942130",
+                "label": "Araloside A Methyl Ester"
+            },
+            {
+                "id": "Q104400023",
+                "pubchem_id": "118855620",
+                "label": "Chikusetsu saponin IV"
+            },
+            {
+                "id": "Q105144764",
+                "pubchem_id": "101671055",
+                "label": "Araloside J"
+            },
+            {
+                "id": "Q15410268",
+                "pubchem_id": "10079497",
+                "label": "Araloside A"
+            },
+            {
+                "id": "Q27136460",
+                "pubchem_id": "54583263",
+                "label": "Chikusetsusaponin-IV methyl ester"
+            },
+            {
+                "id": "Q105137460",
+                "pubchem_id": "101670836",
+                "label": "Araloside H"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q15225265",
+                "label": "Aralia spinifolia"
+            }
+        ],
+        "relations": [
+            [
+                "Q15225265",
+                "Q105306777"
+            ],
+            [
+                "Q15225265",
+                "Q104400023"
+            ],
+            [
+                "Q15225265",
+                "Q105144764"
+            ],
+            [
+                "Q15225265",
+                "Q15410268"
+            ],
+            [
+                "Q15225265",
+                "Q27136460"
+            ],
+            [
+                "Q15225265",
+                "Q105137460"
+            ]
+        ]
+    },
+    "22266736": {
+        "PMID": "22266736",
+        "ArticleTitle": "Sterols from a soft coral, Dendronephthya gigantea as farnesoid X-activated receptor antagonists.",
+        "AbstractText": "Three new steroids 3-oxocholest-1,22-dien-12\u03b2-ol (1), 3-oxocholest-1,4-dien-20\u03b2-ol (2), 3-oxocholest-1,4-dien-12\u03b2-ol (3), and three known steroids (20S)-20-Hydroxyergosta-1,4,24(28)-trien-3-one (4) [7a], 5\u03b1,8\u03b1-Epidioxycholesta-6,22-dien-3\u03b2-ol (5) [10] and 5-cholestene-3\u03b2,12\u03b2-diol (6) [11] were isolated from a soft coral Dendronephthya gigantea. Their chemical structures and relative stereochemistry were elucidated by the analysis of HRMS and 2-D NMR spectroscopic data. The steroids 1 and 2 showed notable inhibitory activity against farnesoid X-activated receptor (FXR) with IC(50)'s 14 and 15\u03bcM.",
+        "id": "Q39408248",
+        "doi": "10.1016/J.STEROIDS.2011.12.027",
+        "chemicals": [
+            {
+                "id": "Q104976466",
+                "pubchem_id": "57208564",
+                "label": "Cholesta-5-ene-3beta,12beta-diol"
+            },
+            {
+                "id": "Q105212393",
+                "pubchem_id": "11441261",
+                "label": "(20S)-20-Hydroxy-1,4,24(28)-ergostatriene-3-one"
+            },
+            {
+                "id": "Q105306474",
+                "pubchem_id": "15454713",
+                "label": "5alpha,8alpha-Epidioxycholesta-6,22-diene-3beta-ol"
+            },
+            {
+                "id": "Q105129660",
+                "pubchem_id": "57386844",
+                "label": "12beta-Hydroxycholesta-1,4-diene-3-one"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q1967066",
+                "label": "Dendronephthya gigantea"
+            }
+        ],
+        "relations": [
+            [
+                "Q1967066",
+                "Q104976466"
+            ],
+            [
+                "Q1967066",
+                "Q105212393"
+            ],
+            [
+                "Q1967066",
+                "Q105306474"
+            ],
+            [
+                "Q1967066",
+                "Q105129660"
+            ]
+        ]
+    },
+    "7553976": {
+        "PMID": "7553976",
+        "ArticleTitle": "Achyranthosides C and D, novel glucuronide saponins from Achyranthes fauriei root.",
+        "AbstractText": "Two novel saponins, achyranthosides C and D, were isolated from Achyranthes faurei root, and their structures were characterized based on the chemical and spectroscopic evidence.",
+        "id": "Q71729930",
+        "doi": "10.1248/CPB.43.896",
+        "chemicals": [
+            {
+                "id": "Q104403539",
+                "pubchem_id": "134692504",
+                "label": "Achyranthoside B"
+            },
+            {
+                "id": "Q111729231",
+                "pubchem_id": "10440913",
+                "label": "CID 10440913"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q1151611",
+                "label": "Achyranthes bidentata"
+            },
+            {
+                "id": "Q50827478",
+                "label": "Achyranthes fauriei"
+            }
+        ],
+        "relations": [
+            [
+                "Q1151611",
+                "Q104403539"
+            ],
+            [
+                "Q50827478",
+                "Q104403539"
+            ],
+            [
+                "Q50827478",
+                "Q111729231"
+            ],
+            [
+                "Q1151611",
+                "Q111729231"
+            ]
+        ]
+    },
+    "29262728": {
+        "PMID": "29262728",
+        "ArticleTitle": "Three new polyketides from fruiting bodies of the endophytic ascomycete Xylaria polymorpha.",
+        "AbstractText": "The isolation of three new secondary metabolites from the fruiting body of Xylaria polymorpha is described. The new compounds are of mixed biosynthetic origin consisting of a polyketide starter, extended with a methyl orsellinate unit and terminated hydrolytically or with an amine-containing terminal unit.",
+        "id": "Q52742225",
+        "doi": "10.1080/14786419.2017.1416378",
+        "chemicals": [
+            {
+                "id": "Q105353236",
+                "pubchem_id": "14629233",
+                "label": "Xylaral B"
+            },
+            {
+                "id": "Q105171842",
+                "pubchem_id": "139591712",
+                "label": "Xylactam D"
+            },
+            {
+                "id": "Q105247257",
+                "pubchem_id": "139591711",
+                "label": "Xylactam C"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q241408",
+                "label": "Xylaria polymorpha"
+            }
+        ],
+        "relations": [
+            [
+                "Q241408",
+                "Q105353236"
+            ],
+            [
+                "Q241408",
+                "Q105171842"
+            ],
+            [
+                "Q241408",
+                "Q105247257"
+            ]
+        ]
+    },
+    "17997563": {
+        "PMID": "17997563",
+        "ArticleTitle": "New lactimidomycin congeners shed insight into lactimidomycin biosynthesis in Streptomyces amphibiosporus.",
+        "AbstractText": "Lactimidomycin (LTM, 1) is a macrolide antitumor antibiotic with a glutarimide side chain from Streptomyces amphibiosporus ATCC53964. To further develop LTM and related analogues as drug candidates we have (i) improved LTM production by approximately 20 fold, (ii) identified three new metabolites (2-4) possibly involved in the LTM biosynthetic pathway; (iii) found 3 to be identical with a previously identified isomigrastatin precursor, (iv) determined the absolute stereochemistry of LTM, and (v) produced new LTM rearrangement products 2a-d and 4a-d.",
+        "id": "Q34712752",
+        "doi": "10.1021/OL702249G",
+        "chemicals": [
+            {
+                "id": "Q77517748",
+                "pubchem_id": "139586945",
+                "label": "17-Hydroxy-8-desmethoxy-isomigrastatin"
+            },
+            {
+                "id": "Q77422863",
+                "pubchem_id": "101450768",
+                "label": "8,9-Dihydrolactimidomycin"
+            },
+            {
+                "id": "Q105203446",
+                "pubchem_id": "11669726",
+                "label": "Lactimidomycin"
+            },
+            {
+                "id": "Q77385190",
+                "pubchem_id": "101450769",
+                "label": "8-Hydroxy-8,9-dihydrolactidomycin"
+            }
+        ],
+        "organisms": [
+            {
+                "id": "Q104096108",
+                "label": "Streptomyces amphibiosporus"
+            }
+        ],
+        "relations": [
+            [
+                "Q104096108",
+                "Q77517748"
+            ],
+            [
+                "Q104096108",
+                "Q77422863"
+            ],
+            [
+                "Q104096108",
+                "Q105203446"
+            ],
+            [
+                "Q104096108",
+                "Q77385190"
+            ]
+        ]
+    }
+}
