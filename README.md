@@ -330,7 +330,7 @@ The hyperparameters estimated for BioGPT were reused for GPT-2.
 
 #### Fine-tuning BioGPT (QLoRA)
 
-In the article BioGPT was fine-tuned according to the tuned hyperparameters, i.e: $lr=1e-4$, $\text{batch-size}=16$, $r=8$, $\alpha=16$, $\text{n\_epochs}=15$.
+In the article BioGPT was fine-tuned according to the tuned hyperparameters, i.e: $lr=1e-4$, $\text{batch-size}=16$, $r=8$, $\alpha=16$, $\text{n-epochs}=15$.
 
 In this example, we used the previously generated abstracts but the training set is too small and training will only led to null $\text{f1-score}$, then no model are saved at the end of the training. Consider using the training sets provided on Zenodo.
 
@@ -468,7 +468,7 @@ python $LAUNCHPATH/seq2rel_hp_finetuning.py --out-dir=$OUTPUT_DIR \
 rm -rf $OUTPUT_SERIALZE
 ```
 
-### Seq2rel Finetuning
+#### Seq2rel Finetuning
 
 For more details and examples, see the corresponding [repository](https://github.com/JohnGiorgi/seq2rel/tree/main).
 
