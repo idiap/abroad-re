@@ -18,7 +18,8 @@ The sparsity of labelled data is an obstacle to the development of Relation Extr
 
 |Dataset|Description|Zenodo|
 |----|----|---|
-|Synthetic datasets Vicuna-13B-1.3 | Synthetic datasets (training/validation) for end-to-end Relation Extraction of relationships between Organisms and Natural-Products: *Diversity-synt*, *Random-synt*, *Extended-synt* | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8422294.svg)](https://doi.org/10.5281/zenodo.8422294)
+|Synthetic datasets Vicuna-13B-1.3 | Synthetic datasets (training/validation) for end-to-end Relation Extraction of relationships between Organisms and Natural-Products: *Diversity-synt*, *Random-synt*, *Extended-synt*. This dataset is used in the corresponding [article](https://arxiv.org/abs/2311.06364) | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8422294.svg)](https://doi.org/10.5281/zenodo.8422294)
+|(**NEW 06/12/2023**) Synthetic datasets Vicuna-13B-1.5 | A synthetic dataset created from the top-1000 (per biological kingdoms) LOTUS literature references extracted with the [GME-sampler](https://github.com/idiap/gme-sampler). The new dataset was generated using [Vicuna-13b-v1.5](https://huggingface.co/lmsys/vicuna-13b-v1.5), derived from [LLaMA 2](https://arxiv.org/abs/2307.09288). | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10231085.svg)](https://doi.org/10.5281/zenodo.10231085)
 |Evaluation dataset|A curated evaluation dataset for end-to-end Relation Extraction of relationships between organisms and natural-products.|[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8422007.svg)](https://doi.org/10.5281/zenodo.8422007)|
 
 
@@ -30,9 +31,10 @@ The sparsity of labelled data is an obstacle to the development of Relation Extr
 |Model|Description|🤗 Hub|
 |----|----|---|
 |biogpt-Natural-Products-RE-Diversity-synt-v1.0| The model is a derived from microsoft/biogpt and was trained on *Diversity-synt*.|[link](https://huggingface.co/mdelmas/biogpt-Natural-Products-RE-Diversity-synt-v1.0)|
-biogpt-Natural-Products-RE-Extended-synt-v1.0 | The model is a derived from microsoft/biogpt and was trained on *Extended-synt*.|[link](https://huggingface.co/mdelmas/biogpt-Natural-Products-RE-Extended-synt-v1.0)|
-BioGPT-Large-Natural-Products-RE-Diversity-synt-v1.0 | The model is a derived from microsoft/BioGPT-Large and was trained on *Diversity-synt*.|[link](https://huggingface.co/mdelmas/BioGPT-Large-Natural-Products-RE-Diversity-synt-v1.0)|
-BioGPT-Large-Natural-Products-RE-Extended-synt-v1.0 | The model is a derived from microsoft/BioGPT-Large and was trained on *Extended-synt*.|[link](https://huggingface.co/mdelmas/BioGPT-Large-Natural-Products-RE-Extended-synt-v1.0)|
+|biogpt-Natural-Products-RE-Extended-synt-v1.0 | The model is a derived from microsoft/biogpt and was trained on *Extended-synt*.|[link](https://huggingface.co/mdelmas/biogpt-Natural-Products-RE-Extended-synt-v1.0)|
+|BioGPT-Large-Natural-Products-RE-Diversity-synt-v1.0 | The model is a derived from microsoft/BioGPT-Large and was trained on *Diversity-synt*.|[link](https://huggingface.co/mdelmas/BioGPT-Large-Natural-Products-RE-Diversity-synt-v1.0)|
+|BioGPT-Large-Natural-Products-RE-Extended-synt-v1.0 | The model is a derived from microsoft/BioGPT-Large and was trained on *Extended-synt*.|[link](https://huggingface.co/mdelmas/BioGPT-Large-Natural-Products-RE-Extended-synt-v1.0)|
+|(**NEW 06/12/2023**) BioGPT-Large-Natural-Products-RE-Diversity-1000-synt-v1.1|The model is a derived from microsoft/BioGPT-Large and was trained on the [new synthetic dataset](https://doi.org/10.5281/zenodo.10231085)|[link](https://huggingface.co/mdelmas/BioGPT-Large-Natural-Products-RE-Diversity-1000-synt-v1.1)|
 
 ## Table of contents
 - [Table of contents](#table-of-contents)
