@@ -38,7 +38,7 @@ The sparsity of labelled data is an obstacle to the development of Relation Extr
 |BioGPT-Large-Natural-Products-RE-Diversity-synt-v1.0 | The model is a derived from microsoft/BioGPT-Large and was trained on *Diversity-synt*.|[link](https://huggingface.co/mdelmas/BioGPT-Large-Natural-Products-RE-Diversity-synt-v1.0)|
 |BioGPT-Large-Natural-Products-RE-Extended-synt-v1.0 | The model is a derived from microsoft/BioGPT-Large and was trained on *Extended-synt*.|[link](https://huggingface.co/mdelmas/BioGPT-Large-Natural-Products-RE-Extended-synt-v1.0)|
 |(**06/12/2023**) BioGPT-Large-Natural-Products-RE-Diversity-1000-synt-v1.1|The model is a derived from microsoft/BioGPT-Large and was trained on the [new synthetic dataset](https://doi.org/10.5281/zenodo.10231085)|[link](https://huggingface.co/mdelmas/BioGPT-Large-Natural-Products-RE-Diversity-1000-synt-v1.1)|
-|**NEW 21/03/2024**) BioMistral-7B-Natural-Products-RE-Diversity-1000-synt-v1.2| The model is derived from Biomistral and was fine-tuned on a new synthetic data produced with Mixtral-8x7B-Instruct.|[link](https://huggingface.co/mdelmas/BioMistral-7B-Natural-Products-RE-Diversity-1000-synt-v1.2)|
+|**NEW 21/03/2024** BioMistral-7B-Natural-Products-RE-Diversity-1000-synt-v1.2| The model is derived from Biomistral and was fine-tuned on a new synthetic data produced with Mixtral-8x7B-Instruct.|[link](https://huggingface.co/mdelmas/BioMistral-7B-Natural-Products-RE-Diversity-1000-synt-v1.2)|
 
 ## Table of contents
 - [Table of contents](#table-of-contents)
