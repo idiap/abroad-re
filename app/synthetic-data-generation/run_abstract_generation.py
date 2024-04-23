@@ -6,12 +6,10 @@
 
 """Generate synthetic abstract"""
 import os
-import sys
 import argparse
 import json
 import numpy as np
 from tqdm import tqdm
-from llama_cpp import Llama
 
 from abstract_generator import LLamaAbstractGenerator, LotusSyntheticData, LotusAbstractSelector
 
@@ -29,7 +27,7 @@ parser.add_argument("--score-threshold", help="the threshold on the score of an 
 args = parser.parse_args()
 
 # set model and generation params for llama.cpp
-MODEL_PARAMS = {"n_ctx": 2048, "n_batch": 512, "n_threads": args.n_threads, "n_gpu_layers": args.n_gpu, "seed": args.seed}
+MODEL_PARAMS = {"n_ctx": 2048, "n_batch": 1024, "n_threads": args.n_threads, "n_gpu_layers": args.n_gpu, "seed": args.seed}
 GENERATION_PARAMS = {"max_tokens": 512, "stop": ["\n\n", "Instructions:", "Title:", "Keywords:", "Main findings:", "Abstract:"], "temperature": 0.7}
 TEMPERATURE_RANGE = np.arange(0, 1.1, 0.1).tolist()
 FINAL_DICT = {}
@@ -38,18 +36,16 @@ SCORE_TH = args.score_th
 
 f_input_name = os.path.splitext(os.path.basename(args.data))[0]
 
-generator = LLamaAbstractGenerator(model_path=args.model_path, model_params=MODEL_PARAMS, log_file_name="abstract-generator-" + f_input_name + ".log")
-logger = generator.logger
+generator = LLamaAbstractGenerator(model_path=args.model_path, model_params=MODEL_PARAMS, logger_name="abstract-generator-" + f_input_name)
 n = args.N
 
-selector = LotusAbstractSelector(logger=logger)
+selector = LotusAbstractSelector(logger=generator.logger)
 
 f_out_name = "out_" + f_input_name + ".json"
 f_excluded_name = "out_" + f_input_name +  "_excluded.txt"
 
 with open(args.data) as f_prompts:
     data_to_prompt = json.load(f_prompts)
-
 
 # For all PMID items
 for pmid, pmid_item in tqdm(data_to_prompt.items()):
@@ -58,7 +54,7 @@ for pmid, pmid_item in tqdm(data_to_prompt.items()):
 
     synthetic_data = []
 
-    logger.info("Run for PMID %s", pmid) 
+    generator.logger.info("Run for PMID %s", pmid) 
 
     # For all generated prompts:
     for index, prompt_item in enumerate(pmid_item["prompts"]):
@@ -70,7 +66,7 @@ for pmid, pmid_item in tqdm(data_to_prompt.items()):
         GENERATION_PARAMS["temperature"] = temperature
 
         # Generate an abstract
-        logger.info("prompt %d: use temperature: %.2f", (index + 1), GENERATION_PARAMS["temperature"])
+        generator.logger.info("prompt %d: use temperature: %.2f", (index + 1), GENERATION_PARAMS["temperature"])
         generated_abstract = generator.generate_abstract(prompt=prompt, parameters=GENERATION_PARAMS)
         
         if generated_abstract:
@@ -81,20 +77,20 @@ for pmid, pmid_item in tqdm(data_to_prompt.items()):
     selected_synthetic_data = selector.select(list_of_synthetic_data=synthetic_data, n=n, score_th=SCORE_TH)
 
     if not len(selected_synthetic_data):
-        logger.warning("No valid abstracts generated for PMID %s. Add to the exlcuded list.", pmid)
+        generator.logger.warning("No valid abstracts generated for PMID %s. Add to the exlcuded list.", pmid)
         EXCLUDED_LIST.append(pmid)
 
     # Browse and add:
     for s_data in selected_synthetic_data:
         FINAL_DICT[s_data.id] = s_data.export()
 
-logger.info("Export generated abstracts")
+generator.logger.info("Export generated abstracts")
 
 with open(os.path.join(args.out_dir, f_out_name), "w", encoding="utf-8") as f_out_abstracts:
     json.dump(FINAL_DICT, f_out_abstracts, indent=4)
 
-logger.info("Export excluded PMID list")
+generator.logger.info("Export excluded PMID list")
 with open(os.path.join(args.out_dir, f_excluded_name), "w", encoding="utf-8") as f_out_excluded:
     for pmid in EXCLUDED_LIST:
         f_out_excluded.write(f"{pmid}\n")
-logger.info("End.")
+generator.logger.info("End.")

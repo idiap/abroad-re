@@ -1,0 +1,22 @@
+name: qlora-llm
+dependencies:
+  - python=3.12
+  - pytorch::pytorch=2.2
+  - pytorch::pytorch-cuda=12.1
+  - nvidia::cuda=12.1
+  - pip
+  - pip:
+    - git+https://github.com/huggingface/peft.git
+    - git+https://github.com/huggingface/transformers.git
+    - git+https://github.com/huggingface/accelerate.git
+    - pandas
+    - scipy
+    - numpy
+    - sentencepiece
+    - datasets
+    - sacremoses
+    - tqdm
+    - optuna
+    - hydra-core
+    - wandb
+    - bitsandbyte

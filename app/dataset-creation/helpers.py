@@ -5,15 +5,26 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 """helpers functions"""
+import os
 import sys
 import random
 import logging
 import requests
+import http
 import pandas as pd
 import numpy as np
-import xml.etree.ElementTree as ET
+import defusedxml.ElementTree as ET
+import xmltodict
 
 from multiprocessing import Pool
+from urllib3 import PoolManager
+from urllib3.exceptions import HTTPError
+from urllib3.util import Retry
+
+from ratelimit import limits
+from ratelimit import sleep_and_retry
+
+
 
 def set_seed(seed):
     """
@@ -142,74 +153,6 @@ def top_n_sampler(data:pd.DataFrame, topn_type:str, N:int, logger:logging.Logger
 
     return sample
 
-def get_pubmed_data(http, ids:list, api_key:str, logger:logging.Logger) -> tuple[dict, list]:
-    """Extract PubMed data (Title + abstract) for a list of PubMed ids
-
-    Args:
-        http (urllib3.poolmanager.PoolManage): The http pool Manager for sending the request to the PubMed EUtils API.
-        ids (list): the lsit of PubMed ids.
-        api_key (str): The NCBI account API key.
-        logger (logging.Logger): the logger instance
-
-    Returns:
-        dict, list: out, missing_pmids. out is a dictionnary of pubmed data. Keys are PubMed ids and values the corresponding titles and abstract. missing_pmids is the list of PubMed ids for which these information could not have been found.
-    """
-    try:
-
-        response = http.request("GET",'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=%s&retmode=xml&retmax=100000&usehistory=n&api_key=%s' % (','.join(ids), api_key), headers = {"Content-Type": "application/xml"})
-
-    except requests.exceptions.RequestException as fail_request:
-        logger.error("Request failed with error: %s", str(fail_request))
-        return (False, False)
-
-    # test if html tags are present and if so remove them
-    list_of_tags_to_remove = ["i", "u", "b", "sup", "sub"]
-
-    response = response.data.decode()
-
-    if any(["<%s>" % tag in str(response) for tag in list_of_tags_to_remove]):
-        for tag in list_of_tags_to_remove:
-            response = response.replace("<%s>" % tag, "")
-            response = response.replace("</%s>" % tag, "")
-
-    root = ET.fromstring(response)
-
-    out = dict()
-
-    pubmed_article_list = root.findall("PubmedArticle")
-
-    for i, pubmed_article in enumerate(pubmed_article_list):
-
-        sub = dict()
-        if pubmed_article.find("MedlineCitation").find("PMID") is not None:
-            sub["PMID"] = pubmed_article.find("MedlineCitation").find("PMID").text
-        else:
-            logger.warning("No PMID found for item %d", i)
-            continue
-
-        if pubmed_article.find("MedlineCitation").find("Article").find("ArticleTitle") is not None:
-            sub["ArticleTitle"] = pubmed_article.find("MedlineCitation").find("Article").find("ArticleTitle").text
-        else:
-            logger.warning("No article title found for item %d", i)
-            continue
-
-        if pubmed_article.find("MedlineCitation").find("Article").find("Abstract") is not None:
-            sub["AbstractText"] = " ".join([sub_abstract.text for sub_abstract in pubmed_article.find("MedlineCitation").find("Article").find("Abstract").findall("AbstractText")])
-        else:
-            logger.warning("No article abstract found for item %d", i)
-            continue
-
-        # If everything if ok, add it.
-        out[sub["PMID"]] = sub
-
-    extracted_pmids = set(out.keys())
-
-    missing_pmids = []
-    if set(ids) != extracted_pmids:
-        missing_pmids = list(set(ids) - extracted_pmids)
-        logger.warning("Not all PMID were extracted. Missing PMID: %s", ", ".join(missing_pmids))
-
-    return (out, missing_pmids)
 
 def get_random_sample(list_of_pmids:list, n:int, seed:int) -> list:
     """Create a random saple of PMIDs
@@ -225,3 +168,179 @@ def get_random_sample(list_of_pmids:list, n:int, seed:int) -> list:
     random.seed(seed)
     sample = random.sample(list_of_pmids, n)
     return sample
+
+
+
+def get_std_logger(name: str, path: str, level: int, stdout: bool):
+    """Create a default logger
+
+    Returns:
+        logging.logger: a default logger
+    """
+
+    # set loggers
+    log_path = os.path.join(path, name + ".log")
+    open(log_path, "w", encoding="utf-8").close()
+
+    logFormatter = logging.Formatter("%(asctime)s %(levelname)-8s %(message)s")
+    logger = logging.getLogger(name)
+    logger.setLevel(level)
+    logger.handlers.clear()
+    logger.propagate = False
+
+    if stdout:
+        log_file_handler = logging.FileHandler(filename=log_path)
+        log_file_handler.setFormatter(fmt=logFormatter)
+        logger.addHandler(log_file_handler)
+        log_stdout_handler = logging.StreamHandler(stream=sys.stdout)
+        log_stdout_handler.setFormatter(fmt=logFormatter)
+        logger.addHandler(log_stdout_handler)
+    else:
+        log_file_handler = logging.FileHandler(filename=log_path)
+        log_file_handler.setFormatter(fmt=logFormatter)
+        logger.addHandler(log_file_handler)
+    return logger
+
+
+
+class PubMedFetcher:
+    def __init__(self, apikey: str, email: str, name="ABRoad-PubMed-fetcher", verbose=True, **kwargs):
+        self.name = name
+        self.http = PoolManager(
+            retries=Retry(
+                **kwargs.pop(
+                    "retries_args",
+                    {
+                        "total": 20,
+                        "backoff_factor": 1,
+                        "connect": 10,
+                        "read": 5,
+                        "redirect": 5,
+                        "status_forcelist": tuple(range(401, 600)),
+                    },
+                )
+            ),
+            timeout=300,
+        )
+        self.logger = get_std_logger(
+            name=name,
+            path=kwargs.get("logging_path", "."),
+            level=(logging.DEBUG if verbose else logging.INFO),
+            stdout=kwargs.get("logger_stdout", True),
+        )
+        self.apikey = apikey
+        self.email = email
+
+    @sleep_and_retry
+    @limits(calls=3, period=1)
+    def send_and_parse_request(self, url, tojson=True):
+        try:
+            response = self.http.request("GET", url)
+        except HTTPError as fail:
+            self.logger.error("Request failed with error: %s", str(fail))
+            return None
+        except http.client.HTTPException as fail_2:
+            self.logger.error("Request failed with error: %s", str(fail_2))
+            return None
+
+        if not tojson:
+            return response.data.decode()
+
+        try:
+            parsed = xmltodict.parse(response.data.decode())
+        except xmltodict.expat.ExpatError as fail:
+            self.logger.error("Fail to parse response: %s", str(fail))
+            return None
+
+        return parsed
+
+    def title_and_abstracts(self, list_of_pmids: list, rate:int = 100):
+        BASE_URL = (
+            "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed"
+            "&id={pmids}&retmode=xml&retmax={retmax}&api_key={apikey}"
+        )
+        OUT = dict()
+
+        RATE_LIMIT = rate
+
+        workling_list = list_of_pmids.copy()
+
+        while len(workling_list):
+            if len(workling_list) > RATE_LIMIT:
+                ids = workling_list[:RATE_LIMIT].copy()
+                del workling_list[:RATE_LIMIT]
+
+            else:
+                ids = workling_list.copy()
+                del workling_list[: len(workling_list)]
+
+            # build and send
+            url = BASE_URL.format(pmids=",".join(ids), retmax=RATE_LIMIT, apikey=self.apikey)
+            output = self.send_and_parse_request(url, tojson=False)
+
+            # if failed, replace by empty result
+            if output is None:
+                output = "<PubmedArticleSet></PubmedArticleSet>"
+
+            # post-process
+            list_of_tags_to_remove = ["i", "u", "b", "sup", "sub"]
+
+            if any(["<%s>" % tag in str(output) for tag in list_of_tags_to_remove]):
+                for tag in list_of_tags_to_remove:
+                    output = output.replace("<%s>" % tag, "")
+                    output = output.replace("</%s>" % tag, "")
+
+            root = ET.fromstring(output)
+
+            pubmed_article_list = root.findall("PubmedArticle")
+
+            for pubmed_article in pubmed_article_list:
+                sub = dict()
+                if pubmed_article.find("MedlineCitation").find("PMID") is not None:
+                    pmid = pubmed_article.find("MedlineCitation").find("PMID").text
+                    sub["PMID"] = pmid
+                else:
+                    self.logger.warning("No PMID found for pmid %s", pmid)
+                    continue
+
+                if pubmed_article.find("MedlineCitation").find("Article").find("ArticleTitle") is not None:
+                    sub["ArticleTitle"] = (
+                        pubmed_article.find("MedlineCitation").find("Article").find("ArticleTitle").text
+                    )
+                else:
+                    self.logger.warning("No article title found for pmid %s", pmid)
+                    sub["ArticleTitle"] = ""
+
+                if pubmed_article.find("MedlineCitation").find("Article").find("Abstract") is not None:
+                    try:
+                        sub["AbstractText"] = " ".join(
+                            [
+                                sub_abstract.text
+                                for sub_abstract in pubmed_article.find("MedlineCitation")
+                                .find("Article")
+                                .find("Abstract")
+                                .findall("AbstractText")
+                            ]
+                        )
+                    except Exception as e:
+                        self.logger.error(
+                            "Some unexpected error happened during the parsing of %s annotations: %s",
+                            sub["PMID"],
+                            str(e),
+                        )
+
+                else:
+                    self.logger.warning("No article abstract found for pmid %s", pmid)
+                    sub["AbstractText"] = ""
+
+                # If everything if ok, add it.
+                OUT[pmid] = sub
+
+        extracted_pmids = set(OUT.keys())
+
+        missing_pmids = []
+        if set(list_of_pmids) != extracted_pmids:
+            missing_pmids = list(set(list_of_pmids) - extracted_pmids)
+            self.logger.warning("Not all PMID were extracted. Missing PMIDs: %s", ", ".join(missing_pmids))
+
+        return (OUT, missing_pmids)

@@ -6,5 +6,8 @@ dependencies:
   - pip
   - pip:
     - eutils
+    - defusedxml
     - tqdm
+    - xmltodict
+    - ratelimit
     - git+https://gitlab.idiap.ch/abroad/gme-sampler.git

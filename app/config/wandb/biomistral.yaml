@@ -1,0 +1,5 @@
+project: "QLoRA-ft-biomistral"
+dir: "path/to/wandb/logs"
+name: "test"
+tags: ["test"]
+group: "test"

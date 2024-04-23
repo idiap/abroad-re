@@ -1,0 +1,15 @@
+name: BioMistral
+eval_step: 50
+num_epochs: 12
+min_epochs_before_eval: 1
+model_hf: 'BioMistral/BioMistral-7B'
+r_lora: 32
+alpla_lora: 64
+train_batch_size: 8
+valid_batch_size: 4
+relation_verbalised: "{org} produces {chem}"
+max_length: 1024
+gradient_accumulation_step: 2
+lr: 2.0e-5
+n_warmup: 100
+target_module: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj", "lm_head"]

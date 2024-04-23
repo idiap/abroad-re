@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 
 
-def create_list_of_np(item:dict, original_chemical_labels:pd.DataFrame, chemical_classes:pd.DataFrame = None, p_chem_class:float = 0.2, **kwargs):
+def create_list_of_np(item:dict, original_chemical_labels:pd.DataFrame, chemical_classes:pd.DataFrame, p_chem_class:float, **kwargs):
     """
     Create a list of relations between organisms and natural products.
     
@@ -351,7 +351,7 @@ def get_relations_labels(org_chem_dict, **kwargs):
 
 
 
-def stringify(org_chem_dict, original_chemical_labels, p_contract:float = 0.9, p_numbering:float = 0.25, compressed_labels:bool = False, **kwargs):
+def stringify(org_chem_dict, original_chemical_labels, p_contract:float, p_numbering:float, compressed_labels:bool, **kwargs):
     """
     Stringify a list of relation between organisms and compounds. 
     Several alternatives ways of writing will be randomly selected and combined: numbering of compounds, compression of derivates, sentence templates. 

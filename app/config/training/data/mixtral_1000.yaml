@@ -1,0 +1,3 @@
+name: mixtral-dataset
+train_path: "/path/to/mixtral-dataset/train.json"
+valid_path: "/path/to/mixtral-dataset/valid.json"

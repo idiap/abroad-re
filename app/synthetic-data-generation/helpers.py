@@ -11,7 +11,7 @@ import json
 import random
 from collections import defaultdict
 
-def get_logger(name, **kwargs):
+def get_std_logger(name: str = "default-sdg-logger", path: str = ".", level: int = 0, stdout: bool = False):
     """Create a default logger
 
     Returns:
@@ -19,14 +19,26 @@ def get_logger(name, **kwargs):
     """
 
     # set loggers
-    level = kwargs.get("level", logging.DEBUG)
-    log_path = kwargs.get("path", "./prompting-generate-abstract.log")
-    open(log_path, 'w', encoding="utf-8").close()
+    log_path = os.path.join(path, name + ".log")
+    open(log_path, "w", encoding="utf-8").close()
 
-    handlers = [logging.FileHandler(filename=log_path), logging.StreamHandler(stream=sys.stdout)]
-    logging.basicConfig(handlers=handlers, format='%(asctime)s %(levelname)-8s %(message)s', level=level)
+    logFormatter = logging.Formatter("%(asctime)s %(levelname)-8s %(message)s")
     logger = logging.getLogger(name)
+    logger.setLevel(level)
+    logger.handlers.clear()
+    logger.propagate = False
 
+    if stdout:
+        log_file_handler = logging.FileHandler(filename=log_path)
+        log_file_handler.setFormatter(fmt=logFormatter)
+        logger.addHandler(log_file_handler)
+        log_stdout_handler = logging.StreamHandler(stream=sys.stdout)
+        log_stdout_handler.setFormatter(fmt=logFormatter)
+        logger.addHandler(log_stdout_handler)
+    else:
+        log_file_handler = logging.FileHandler(filename=log_path)
+        log_file_handler.setFormatter(fmt=logFormatter)
+        logger.addHandler(log_file_handler)
     return logger
 
 def split_json(input_json_path, out_dir, l=100):
@@ -42,7 +54,6 @@ def split_json(input_json_path, out_dir, l=100):
 
     with open(input_json_path, "r") as f:
         data = json.load(f)
-    import random
     list_of_keys = [k for k in data.keys()]
     L = len(list_of_keys)
     n_groups = (L // l) + (L % l > 0)
@@ -161,4 +172,3 @@ def merge_dataset_into_large(list_of_dataset_path, out_dir, split = [0.9, 0.1]):
         json.dump(valid_set, f_valid_out, indent=4)
     
     return True
-

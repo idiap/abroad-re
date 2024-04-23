@@ -9,7 +9,7 @@ import os
 import sys
 import logging
 import argparse
-from helpers import read_data, display_stat, set_seed, random_sampler, top_n_sampler
+from helpers import read_data, display_stat, set_seed, random_sampler, top_n_sampler, get_std_logger
 from gme.gme import GreedyMaximumEntropySampler
 
 # Get arguments
@@ -35,11 +35,7 @@ if not os.path.exists(os.path.join(args.out_dir, "entropies")):
     os.makedirs(os.path.join(args.out_dir, "entropies"))
 
 # set loggers
-log_path = os.path.join(args.out_dir, "sampling_" + args.sampler +  ("_freq" if not args.binarised else "") + ".log")
-open(log_path, 'w', encoding="utf-8").close()
-handlers = [logging.FileHandler(filename=log_path), logging.StreamHandler(stream=sys.stdout)]
-logging.basicConfig(handlers=handlers, format='%(asctime)s %(levelname)-8s %(message)s', level=logging.DEBUG)
-logger = logging.getLogger('lotus-dataset-creator')
+logger = get_std_logger("lotus-dataset-creator", path=args.out_dir, level=logging.DEBUG, stdout=True)
 
 data = read_data(path=args.input, sep="\t", logger=logger)
 display_stat(data, logger)

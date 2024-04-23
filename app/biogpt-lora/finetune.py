@@ -63,14 +63,15 @@ TRAIN_BATCH_SIZE = args.batch_size
 VALID_BATCH_SIZE = args.valid_batch_size
 EVAL_STEP = int(args.eval_steps)
 LOG_STEP = int(args.log_steps)
-EVAL_GENERATION_ARGS = {"max_length": MAX_LENGTH, "early_stopping": True, "no_repeat_ngram_size": 30, "temperature": 0}
+# FIX: set temperature to one for geedy decoding. 
+EVAL_GENERATION_ARGS = {"do_sample": False, "num_beams": 1, "max_length": MAX_LENGTH, "temperature": 1}
 MIN_EPOCH_BEFORE_EVAL = int(args.epochs_bf_eval)
 
 GRADIENT_ACCUMULATION_STEP = 1
 if TRAIN_BATCH_SIZE == 4:
     GRADIENT_ACCUMULATION_STEP = 20
 elif TRAIN_BATCH_SIZE == 6:
-        GRADIENT_ACCUMULATION_STEP = 13
+    GRADIENT_ACCUMULATION_STEP = 13
 elif TRAIN_BATCH_SIZE == 8:
     GRADIENT_ACCUMULATION_STEP = 10
 elif TRAIN_BATCH_SIZE == 12:

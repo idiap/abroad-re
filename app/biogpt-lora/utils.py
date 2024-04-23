@@ -7,6 +7,7 @@
 import sys
 import pandas as pd
 import torch
+import numpy as np
 import io
 import logging
 from torch.utils.data import Dataset
@@ -29,7 +30,10 @@ def batch_predict(model, batch, tokenizer, generate_args, device, logger):
 
     # Extract input ids and prepare for prompting with only the input abstract: 
     generation_inputs = batch["input_ids"].clone()
-    starts_generation = (generation_inputs == BOS_TOKEN_ID).nonzero()[:, 1]
+    if tokenizer.name_or_path == "BioMistral/BioMistral-7B":
+        starts_generation = (generation_inputs[:, 1:] == BOS_TOKEN_ID).nonzero()[:, 1] + 1
+    else:
+        starts_generation = (generation_inputs == BOS_TOKEN_ID).nonzero()[:, 1]
     padding_length = starts_generation.max()
     generation_inputs = generation_inputs[:, :(padding_length + 1)]
     generation_attemtion_mask = batch["attention_mask"].clone()[:, :(padding_length + 1)]
@@ -42,7 +46,7 @@ def batch_predict(model, batch, tokenizer, generate_args, device, logger):
         left_padded_attention[(padding_length - starts_generation[i]):] = 1
         generation_inputs[i] = left_padded_input
         generation_attemtion_mask[i] = left_padded_attention
-
+    
     generation = model.generate(input_ids=generation_inputs.to(device), attention_mask=generation_attemtion_mask.to(device), **generate_args)
     
     decoded_output = []
@@ -172,7 +176,8 @@ def evaluate(model, validation_dataloader, tokenizer, do_generate_eval, generate
                logger.info("In Eval - compute metrics for batch (%d / %d)", (index + 1), len(validation_dataloader))
                decoded_output = batch_predict(model, batch, tokenizer, generate_args, device, logger)
                recovered_labels = prepare_decoded_labels(batch["labels"].detach().cpu(), tokenizer)
-
+               print(decoded_output)
+               print(recovered_labels)
                batch_total_P, batch_total_TP, batch_total_FP = compute_metrics(decoded_output, recovered_labels, logger)
 
                total_positives += batch_total_P
@@ -199,6 +204,7 @@ def evaluate(model, validation_dataloader, tokenizer, do_generate_eval, generate
 
 class BioGPTLOTUSDataset(Dataset):
   """
+  Truncate input text if too long
   """
 
   def __init__(self, data, tokenizer, template, relation_separator, max_length):
@@ -212,7 +218,6 @@ class BioGPTLOTUSDataset(Dataset):
     self.EOS = self.tokenizer.eos_token
     self.EOS_id = self.tokenizer.eos_token_id
 
-
   def __len__(self):
     return len(self.data)
 
@@ -225,28 +230,64 @@ class BioGPTLOTUSDataset(Dataset):
     # get input_text tokens:
     sep = self.relation_separator
     input_text = self.data[index]["ArticleTitle"].strip("\n ") + " " + self.data[index]["AbstractText"].strip("\n ")
-    output_text = sep.join([self.template.format(org=orgs[orgs["id"] == org_id]["label"].values[0], chem=chems[chems["id"] == chem_id]["label"].values[0]) for (org_id, chem_id) in self.data[index]["relations"]])
+    raw_output_text = sep.join([self.template.format(org=orgs[orgs["id"] == org_id]["label"].values[0], chem=chems[chems["id"] == chem_id]["label"].values[0]) for (org_id, chem_id) in self.data[index]["relations"]])
 
-    # TODO: temporal fix for GPT2-m baseline. Due to its non-bio-related tokenizer for a hand of abstract which longer than average, it cannot tokenized them in less than 1024 token. We apply this simple heuristic here to fix this. Need to find a better way.
-    if len(input_text) > 1500:
-        input_text = input_text[:1500]
-
-    input_text = input_text + self.EOS
-    output_text = self.BOS + output_text + self.EOS
+    input_text = input_text
+    output_text = self.EOS + self.BOS + raw_output_text + self.EOS
 
     # merge and toknenize
     global_input = input_text + output_text
     tokenized = self.tokenizer(global_input, max_length=self.max_length, padding='max_length', truncation=True)
+    # print(tokenized)
 
     # Was the content truncated ?
     if tokenized["input_ids"][-1] != self.tokenizer.pad_token_id:
-        # Replace by eos token
-        tokenized["input_ids"][-1] = self.EOS_id
+        # get the length of the tokenized output. We suppose that it is at least always less than the context window
+        # Warning: In the case of bioGpt the tokenizer auto-happen an eos at the beginining, while in the case of Mistral it's a BOS 
+        if self.tokenizer.name_or_path == "BioMistral/BioMistral-7B":
+            new_output_text = raw_output_text + self.EOS
+        else:
+            new_output_text = self.BOS + raw_output_text + self.EOS
+        
+        tokenized_output_text = self.tokenizer(new_output_text, max_length=self.max_length, padding='max_length', truncation=True)
+
+        # Get the tokenized input text. Likely this was too long.
+        tokenized_input_text = self.tokenizer(input_text, max_length=self.max_length, padding='max_length', truncation=True)["input_ids"]
+        # print(tokenized_input_text)
+
+        # if we want to keep all the output, then this is the remaining space we have to put all the input tokens
+        length_output = np.count_nonzero(tokenized_output_text["attention_mask"])
+        remaining_after_output = self.max_length - length_output
+        
+        # As we will have to add manually the EOS for biomistral
+        if self.tokenizer.name_or_path == "BioMistral/BioMistral-7B":
+            remaining_after_output = remaining_after_output - 1
+
+        # The input in truncated to this size
+        truncated_tokenized_input_text = tokenized_input_text[:remaining_after_output]
+        assert len(truncated_tokenized_input_text) == remaining_after_output
+
+        # remerge everything together
+        if self.tokenizer.name_or_path == "BioMistral/BioMistral-7B":
+            merged_tokenized_input_output = truncated_tokenized_input_text + [self.EOS_id] + tokenized_output_text["input_ids"][:length_output]
+        else:
+            merged_tokenized_input_output = truncated_tokenized_input_text + tokenized_output_text["input_ids"][:length_output]
+        assert len(merged_tokenized_input_output) == self.max_length
+
+        # The attention mask is irrelevant if we reach the end of the context windowas there is no padding left.
+        merged_attention_mask = [1] * self.max_length
+        tokenized["input_ids"] = merged_tokenized_input_output
+        tokenized["attention_mask"] = merged_attention_mask
 
     # get the start and end of the output (the labels)
-    start_of_output = tokenized["input_ids"].index(self.BOS_id)
-    end_of_output = len(tokenized["input_ids"]) - tokenized["input_ids"][::-1].index(self.EOS_id) - 1
+    if self.tokenizer.name_or_path == "BioMistral/BioMistral-7B":
+        # Skip the first BOS token for Biomistral
+        start_of_output = tokenized["input_ids"][1:].index(self.BOS_id) + 1
+    else:
+        # If not do as for BioGPT
+        start_of_output = tokenized["input_ids"].index(self.BOS_id)
 
+    end_of_output = len(tokenized["input_ids"]) - tokenized["input_ids"][::-1].index(self.EOS_id) - 1
     # Create the output labels.
     labels = tokenized["input_ids"].copy()
 
@@ -260,11 +301,7 @@ class BioGPTLOTUSDataset(Dataset):
     tokenized["input_ids"] = torch.tensor(tokenized["input_ids"])
     tokenized["attention_mask"] = torch.tensor(tokenized["attention_mask"])
     tokenized["labels"] = torch.tensor(labels)
-
-    # for k in tokenized.keys():
-      # tokenized[k] = torch.squeeze(tokenized[k])
-
-    # remove
+    
     return tokenized
 
 def get_logger(name, **kwargs):
@@ -279,10 +316,23 @@ def get_logger(name, **kwargs):
     log_path = kwargs.get("path", "./training.log")
     open(log_path, 'w', encoding="utf-8").close()
 
-    handlers = [logging.FileHandler(filename=log_path), logging.StreamHandler(stream=sys.stdout)]
-    logging.basicConfig(handlers=handlers, format='%(asctime)s %(levelname)-8s %(message)s')
+    logFormatter = logging.Formatter("%(asctime)s %(levelname)-8s %(message)s")
     logger = logging.getLogger(name)
     logger.setLevel(level)
+    logger.handlers.clear()
+    logger.propagate = False
+
+    if kwargs.get("stdout", False):
+        log_file_handler = logging.FileHandler(filename=log_path)
+        log_file_handler.setFormatter(fmt=logFormatter)
+        logger.addHandler(log_file_handler)
+        log_stdout_handler = logging.StreamHandler(stream=sys.stdout)
+        log_stdout_handler.setFormatter(fmt=logFormatter)
+        logger.addHandler(log_stdout_handler)
+    else:
+        log_file_handler = logging.FileHandler(filename=log_path)
+        log_file_handler.setFormatter(fmt=logFormatter)
+        logger.addHandler(log_file_handler)
 
     return logger
 
@@ -342,5 +392,3 @@ def define_context(model_hf, train_dataset, r_lora, alpha_lora, batch_size, lr, 
         num_training_steps=n_steps)
 
     return model, optimizer, train_dataloader, lr_scheduler
-
-

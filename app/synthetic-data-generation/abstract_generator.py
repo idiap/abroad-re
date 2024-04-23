@@ -10,7 +10,7 @@ import logging
 import numpy as np
 from llama_cpp import Llama
 from abc import ABC, abstractmethod
-from general_helpers import get_logger
+from helpers import get_std_logger
 
 
 class SyntheticData(ABC):
@@ -66,15 +66,16 @@ class AbstractGenerator(ABC):
 
 class LLamaAbstractGenerator(AbstractGenerator):
 
-    def __init__(self, model_path, model_params, logger_level=logging.DEBUG, log_dir = ".", log_file_name="abstract-generator.log"):
+    def __init__(self, model_path, model_params, logger_name="LLama-abstract-generator", logger_level=logging.DEBUG, log_dir = ".", **kwargs):
         self.llm_model_path = model_path
         self.llm_model_params = model_params
         self.llm_model = None
-        self.logger = get_logger(name="LLama-abstract-generator", level=logger_level, path=os.path.join(log_dir, log_file_name))
+        self.logger = kwargs["logger"] if "logger" in kwargs else get_std_logger(name=logger_name, level=logger_level, path=log_dir)
 
-    def load_model(self):
+    def load_model(self, verbose=False):
         try:
             self.llm_model = Llama(model_path=self.llm_model_path, **self.llm_model_params)
+            self.llm_model.verbose = False
         except ValueError as e_init:
             self.logger.error(str(e_init))
             sys.exit(1)
@@ -112,8 +113,8 @@ class AbstractSelector(ABC):
 
 class LotusAbstractSelector(AbstractSelector):
 
-    def __init__(self, logger):
-        self.logger = logger
+    def __init__(self, logger_name="abstract-selector", logger_level=logging.DEBUG, log_dir=".", **kwargs):
+        self.logger = kwargs["logger"] if "logger" in kwargs else get_std_logger(name=logger_name, level=logger_level, path=log_dir)
 
     def get_score(self, synthetic_data:LotusSyntheticData):
         
@@ -190,7 +191,3 @@ class LotusAbstractSelector(AbstractSelector):
             output.append(o)
 
         return output
-       
-
-
-           
