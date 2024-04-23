@@ -1,0 +1,4 @@
+defaults:
+  - data: mixtral_1000
+  - model: biomistral
+output_dir: /path/to/output/${training.model.name}/${training.data.name}/${wandb.name}-${now:%Y-%m-%d_%H-%M-%S}

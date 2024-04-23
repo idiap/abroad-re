@@ -58,8 +58,10 @@ The sparsity of labelled data is an obstacle to the development of Relation Extr
     - [Building environment (qlora)](#building-environment-qlora)
     - [Hyperparameters tuning (BioGPT)](#hyperparameters-tuning-biogpt)
     - [Fine-tuning BioGPT (QLoRA)](#fine-tuning-biogpt-qlora)
+    - [**New** Fine-tuning BioMistral (QLoRA)](#fine-tuning-biomistral-qlora)
     - [Fine-tuning GPT-2 (QLoRA)](#fine-tuning-gpt-2-qlora)
     - [Inference with a BioGPT/BioGPT-Large model](#inference-with-a-biogptbiogpt-large-model)
+    - [**New** Inference with a BioMistral model](#inference-with-a-biomistral-model)
 - [Seq2rel](#seq2rel)
     - [Building environment (seq2rel)](#building-environment-seq2rel))
     - [Convert datasets to seq2rel format](#convert-datasets-to-seq2rel-format)
@@ -398,6 +400,22 @@ See for the other arguments:
 python $LAUNCHPATH/finetune-gpt2.py --help
 ```
 
+#### Fine-tuning BioMistral (QLoRA)
+
+1) Get the Mixtral synthetic dataset on Zenodo (*Synthetic dataset for end-to-end Relation Extraction of relationships between Organisms and Natural-Products with Mixtral-8x7B-Instruct-v0.1*)
+
+2) Use the new env *qlora-llm*
+
+3) The new training settings use *wandb* for monitoring and *hydra* for configuration management.
+After filling the hydra config files with the correct paths for the train and valid *json* files (*app/config/training/data/mixtral_1000.yaml* and *app/config/training/training_biomistral.yaml*), use:
+
+```bash
+conda activate qlora-llm
+
+# train
+python app/biogpt-lora/biomistral-qlora.py wandb.name=fine-tune-biomistral training/data=mixtral_1000
+```
+
 #### Inference with a BioGPT/BioGPT-Large model
 
 Here is an example with a BioGPT-Large model with the adapters fine-tuned with the created **Diversity-synt** dataset. We use the same evaluation dataset as in the article. The parameters for decoding were also tuned.
@@ -424,6 +442,14 @@ python $LAUNCHPATH/inference_eval.py \
     --output-dir=$OUTPUTDIR \
     --valid-b-size=2
 ```
+
+#### Inference with a BioMistral model
+
+*Tips:* see the provided notebook.
+
+First, use *app/biogpt-lora/merge_qlora_with_quantized_model.py* to merge the adapters into the base model.
+
+Then, use *app/biogpt-lora/inference_eval-biomistral.py*, providing the original hf model to load the tokenizer and the mergeds model. The rest is as the inference for BioGPT.
 
 ### Seq2rel
 

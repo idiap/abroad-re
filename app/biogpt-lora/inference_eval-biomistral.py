@@ -20,7 +20,7 @@ from utils import BioGPTLOTUSDataset, get_logger, evaluate
 parser = argparse.ArgumentParser()
 
 parser.add_argument("--source-model", help="model of the source model from HF", type=str, required=True, dest='model_hf')
-parser.add_argument("--lora-adapters", help="path to the LoRA adapters directoy", type=str, required=True, dest='lora_adapters')
+parser.add_argument("--merged-model", help="path to the LoRA adapters directoy", type=str, required=True, dest='merged_model')
 parser.add_argument("--test", help="path to json train file", type=str, required=True, dest='test_path')
 parser.add_argument("--hf", help="Look for adapters on Hugging Face", required=False, default=False, action='store_true', dest="adapters_on_hf")
 parser.add_argument("--output-dir", help="path to the output dir", type=str, required=True, dest='out_dir')
@@ -39,7 +39,7 @@ RELATION_VERBALISED="{org} produces {chem}"
 
 VALID_BATCH_SIZE = args.valid_batch_size
 
-lora_adapters = args.lora_adapters
+merged_model = args.merged_model
 
 output_dir = args.out_dir
 
@@ -56,12 +56,12 @@ else:
     device = torch.device("cpu")
 
 
-name = os.path.basename(args.lora_adapters)
+name = os.path.basename(args.merged_model)
 
 logger = get_logger("eval-biogpt-qlora-model", path=os.path.join(output_dir, name + "-eval-biogpt-qlora-model.log"))
 
-if not args.adapters_on_hf and not os.path.exists(lora_adapters):
-    logger.info("Can't find LoRA adapteres directoy")
+if not args.adapters_on_hf and not os.path.exists(merged_model):
+    logger.info("Can't find merged model directoy")
     sys.exit(1)
 
 # READ
@@ -86,7 +86,7 @@ test_dataloader = DataLoader(test_dataset, batch_size=VALID_BATCH_SIZE, shuffle 
 # Load model
 BNB_CONFIG = BitsAndBytesConfig(load_in_8bit=True)
 
-model = AutoModelForCausalLM.from_pretrained(lora_adapters, quantization_config=BNB_CONFIG, device_map={"":0})
+model = AutoModelForCausalLM.from_pretrained(merged_model, quantization_config=BNB_CONFIG, device_map={"":0})
 print(model)
 logger.info("Generation config: %s", EVAL_GENERATION_ARGS)
 
