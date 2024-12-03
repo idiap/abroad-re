@@ -2,7 +2,9 @@
 
 # Relation Extraction in underexplored biomedical domains: A diversity-optimised sampling and synthetic data generation approach
 
-**&rarr; NEW 21/03/2024 Test the new Biomistral fine-tuned model:** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/idiap/abroad-re/blob/main/notebooks/inference_biomistral.ipynb)
+**&rarr; NEW 09/2024 - The paper has been accepted for publication in Computational Linguistics: see the paper here: [:page_facing_up:](https://aclanthology.org/2024.cl-3.4)**
+
+**&rarr; NEW 21/03/2024 - Test the new Biomistral fine-tuned model:** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/idiap/abroad-re/blob/main/notebooks/inference_biomistral.ipynb)
 
 
 **Code for the article "Relation Extraction in underexplored biomedical domains: A diversity-optimised sampling and synthetic data generation approach"**
@@ -68,6 +70,7 @@ The sparsity of labelled data is an obstacle to the development of Relation Extr
     - [Seq2rel Finetuning](#seq2rel-finetuning)
     - [Inference with Seq2rel](#inference-with-seq2rel)
 - [Few-shot learning](#few-shot-learning)
+- [Citation](#citation)
 
 ## Dataset pre-processing, extraction and formating
 
@@ -551,6 +554,31 @@ OUTPUTDIR="output/examples/evals/icl"
 python $LAUNCHPATH/compute_metrics.py --input=$PREDS \
     --output-file="$OUTPUTDIR/perf.json" \
     --test-file=$REF
+```
+
+
+## Citation
+:page_facing_up:
+If you found the paper and/or this repository useful, please consider citing our work: :+1:
+
+```bibtex
+@article{delmas-etal-2024-relation,
+    title = "Relation Extraction in Underexplored Biomedical Domains: A Diversity-optimized Sampling and Synthetic Data Generation Approach",
+    author = "Delmas, Maxime  and
+      Wysocka, Magdalena  and
+      Freitas, Andr{\'e}",
+    journal = "Computational Linguistics",
+    volume = "50",
+    number = "3",
+    month = sep,
+    year = "2024",
+    address = "Cambridge, MA",
+    publisher = "MIT Press",
+    url = "https://aclanthology.org/2024.cl-3.4",
+    doi = "10.1162/coli_a_00520",
+    pages = "953--1000",
+    abstract = "The sparsity of labeled data is an obstacle to the development of Relation Extraction (RE) models and the completion of databases in various biomedical areas. While being of high interest in drug-discovery, the literature on natural products, reporting the identification of potential bioactive compounds from organisms, is a concrete example of such an overlooked topic. To mark the start of this new task, we created the first curated evaluation dataset and extracted literature items from the LOTUS database to build training sets. To this end, we developed a new sampler, inspired by diversity metrics in ecology, named Greedy Maximum Entropy sampler (https://github.com/idiap/gme-sampler). The strategic optimization of both balance and diversity of the selected items in the evaluation set is important given the resource-intensive nature of manual curation. After quantifying the noise in the training set, in the form of discrepancies between the text of input abstracts and the expected output labels, we explored different strategies accordingly. Framing the task as an end-to-end Relation Extraction, we evaluated the performance of standard fine-tuning (BioGPT, GPT-2, and Seq2rel) and few-shot learning with open Large Language Models (LLMs) (LLaMA 7B-65B). In addition to their evaluation in few-shot settings, we explore the potential of open LLMs as synthetic data generators and propose a new workflow for this purpose. All evaluated models exhibited substantial improvements when fine-tuned on synthetic abstracts rather than the original noisy data. We provide our best performing (F1-score = 59.0) BioGPT-Large model for end-to-end RE of natural products relationships along with all the training and evaluation datasets. See more details at https://github.com/idiap/abroad-re.",
+}
 ```
 
 
